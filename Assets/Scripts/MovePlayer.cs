@@ -5,7 +5,11 @@ public class MovePlayer : MonoBehaviour
 
     private Rigidbody2D _rb;
     private float _speed = 4f;
-    private int k = 0, movex = 0;
+    private float jumpForce = 5f;
+    private bool isGround;
+    private float rayDistance = 0.6f;
+    private bool doubleJump = false;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -13,36 +17,40 @@ public class MovePlayer : MonoBehaviour
 
     void Update()
     {
+        RaycastHit2D hit = Physics2D.Raycast(_rb.position, Vector2.down, rayDistance, LayerMask.GetMask("Ground"));
+
+        if (hit.collider != null)
+        { 
+            isGround = true;
+            doubleJump = false;
+        }
+        else
+            isGround = false;
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            movex = 1;
+            _rb.linearVelocityX = _speed;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            movex = -1;
+            _rb.linearVelocityX = -_speed;
         }
         else
         {
-            movex = 0;
+            _rb.linearVelocityX = 0;
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && k < 2)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGround)
         {
-            k++;
-            _rb.linearVelocityY = _speed;
+            _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && k > 2)
+        else if(!doubleJump && Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Input.GetKeyDown(KeyCode.UpArrow).Equals(false);
+            doubleJump = true;
+            _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
+
+        
     }
 
-    private void FixedUpdate()
-    {
-        _rb.linearVelocityX = _speed * movex;
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        k = 0;
-    }
-
+    
 }

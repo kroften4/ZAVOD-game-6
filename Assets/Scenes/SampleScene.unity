@@ -719,7 +719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _platformsLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
   _jumpForce: 5
   _rayDistance: 0.6
 --- !u!1 &738742916
@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 738742920}
   - component: {fileID: 738742919}
   - component: {fileID: 738742918}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: PlatformTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

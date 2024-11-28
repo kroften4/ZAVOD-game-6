@@ -352,7 +352,8 @@ GameObject:
   - component: {fileID: 735307422}
   - component: {fileID: 735307421}
   - component: {fileID: 735307420}
-  - component: {fileID: 735307419}
+  - component: {fileID: 735307427}
+  - component: {fileID: 735307426}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -360,18 +361,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &735307419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735307418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95134a6d9c7c04f4bb9fa2314214c7b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &735307420
 Rigidbody2D:
   serializedVersion: 5
@@ -388,7 +377,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b90609dcd8c2a3840ab1eaa60237dfc8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -516,6 +505,36 @@ Transform:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &735307426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735307418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97ab26c80c014e48b94267bbcd34323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 4
+--- !u!114 &735307427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735307418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95134a6d9c7c04f4bb9fa2314214c7b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _platformsLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _jumpForce: 5
+  _rayDistance: 0.6
 --- !u!1 &738742916
 GameObject:
   m_ObjectHideFlags: 0

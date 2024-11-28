@@ -3,19 +3,19 @@ using UnityEngine;
 public class JumpPlayer : MonoBehaviour
 {
 
-    private Rigidbody2D _rb;
     [SerializeField] private LayerMask _platformsLayer;
     [SerializeField] private float _jumpForce = 5f;
-    private bool _isGround;
     [SerializeField] private float _rayDistance = 0.6f;
+    private Rigidbody2D _rb;
+    private bool _isGround;
     private bool _doubleJump = false;
 
-    void Awake()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     { 
         if (Input.GetKeyDown(KeyCode.UpArrow) && _isGround)
         {

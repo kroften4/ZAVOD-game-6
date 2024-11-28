@@ -1,8 +1,10 @@
 using TMPro.EditorUtilities;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class SpikeyCrawl : MonoBehaviour
 {
+    [SerializeField] private bool _onlyMoveLeftRight = false;
     [SerializeField] private float _moveSpeed = 2;
     [SerializeField] private Transform _center;
     [SerializeField] private float _distToGround = 0.5f;
@@ -42,18 +44,53 @@ public class SpikeyCrawl : MonoBehaviour
         return Physics2D.Raycast(_center.position, ForwardVector, _distToWall, _platformsLayer);
     }
 
+    private void Flip()
+    {
+        float pivotDistance = -_center.localPosition.x;
+        transform.position += ForwardVector * pivotDistance;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        transform.position += -ForwardVector * (pivotDistance - 0.1f);
+    }
+
+    private void Rotate()
+    {
+        float pivotDistance = -_center.localPosition.x;
+        transform.position += ForwardVector * pivotDistance;
+        transform.Rotate(0, 0, transform.lossyScale.x * 90);
+        transform.position += ForwardVector * 0.1f;
+        transform.position += -ForwardVector * pivotDistance;
+    }
+
+    private void WallRotate()
+    {
+        float pivotDistance = -_center.localPosition.x;
+        transform.position += ForwardVector * (pivotDistance + _distToWall);
+        transform.Rotate(0, 0, transform.lossyScale.x * -90);
+        transform.position += ForwardVector * 0.1f;
+    }
+
     private void FixedUpdate()
     {
         if (!IsGrounded())
         {
-            transform.position += -ForwardVector * _center.localPosition.x;
-            transform.Rotate(0, 0, transform.lossyScale.x * 90);
-            transform.position += ForwardVector * (_center.localPosition.x + 0.1f);
+            if (_onlyMoveLeftRight)
+            {
+                Flip();
+            }
+            else
+            {
+                Rotate();
+            }
         }
 
         if (IsHittingWall())
         {
-
+            if (_onlyMoveLeftRight)
+                Flip();
+            else
+            {
+                WallRotate();
+            }
         }
     }
 

@@ -5,7 +5,7 @@ public class MovePlayer : MonoBehaviour
 
     private Rigidbody2D _rb;
     private float _speed = 4f;
-    private int k = 0;
+    private int k = 0, movex = 0;
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -15,27 +15,31 @@ public class MovePlayer : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            _rb.linearVelocityX = _speed;
+            movex = 1;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            _rb.linearVelocityX = -_speed;
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            k++;
-            _rb.linearVelocityY = _speed;
-            if(k > 2)
-            {
-                _rb.linearVelocityY = 0;
-            }
+            movex = -1;
         }
         else
         {
-            _rb.linearVelocityX = 0f;
+            movex = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow) && k < 2)
+        {
+            k++;
+            _rb.linearVelocityY = _speed;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && k > 2)
+        {
+            Input.GetKeyDown(KeyCode.UpArrow).Equals(false);
         }
     }
 
+    private void FixedUpdate()
+    {
+        _rb.linearVelocityX = _speed * movex;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         k = 0;

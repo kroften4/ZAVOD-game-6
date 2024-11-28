@@ -39,4 +39,9 @@ public class JumpPlayer : MonoBehaviour
         else
             _isGround = false;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawRay(transform.position, Vector2.down * _rayDistance);
+    }
 }

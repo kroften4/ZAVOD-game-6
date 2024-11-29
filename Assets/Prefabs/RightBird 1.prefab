@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3528835337584808436}
   - component: {fileID: 8077328849433335124}
   - component: {fileID: 6582451428395149880}
-  - component: {fileID: 7341982975129905403}
   - component: {fileID: 2445915587730890595}
   m_Layer: 0
   m_Name: RightBird 1
@@ -140,19 +139,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &7341982975129905403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2736480840150947957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2b7b59a8b20e02419e052d03d56361f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 8077328849433335124}
 --- !u!114 &2445915587730890595
 MonoBehaviour:
   m_ObjectHideFlags: 0

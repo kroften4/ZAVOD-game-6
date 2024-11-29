@@ -563,7 +563,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: b90609dcd8c2a3840ab1eaa60237dfc8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -720,7 +720,7 @@ MonoBehaviour:
   _platformsLayer:
     serializedVersion: 2
     m_Bits: 64
-  _jumpForce: 5
+  _jumpForce: 10
   _rayDistance: 0.6
 --- !u!1 &738742916
 GameObject:

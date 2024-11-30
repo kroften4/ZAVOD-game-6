@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    private Rigidbody2D _rb;
     [SerializeField] private float _speed = 4f;
-    public float _pushForce = 10f;
+    [SerializeField] float _pushForce = 10f;
+    private Rigidbody2D _rb;
+    private Vector2 _pushDirection;
+    private bool _isTouchingWall;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();  
@@ -24,6 +27,15 @@ public class MovePlayer : MonoBehaviour
         {
             _rb.linearVelocityX = 0;
         }
+
+        if (Input.GetKey(KeyCode.UpArrow) && _isTouchingWall)
+        {
+            Debug.Log("pushing");
+            Debug.Log(_pushDirection);
+            _rb.linearVelocity = Vector2.zero;
+            _rb.AddForce(_pushDirection * _pushForce, ForceMode2D.Impulse);
+        }
+        _isTouchingWall = false;
     }
 
     // отталкивание от стенок не работает
@@ -34,10 +46,9 @@ public class MovePlayer : MonoBehaviour
             Vector2 normal = collision.contacts[0].normal;
             if (Mathf.Abs(normal.x) > Mathf.Abs(normal.y)) //определяем, что сталкиваемся именно "боком" игрока с платформой
             {
-                Vector2 pushDirection = -normal.normalized;
-                _rb.linearVelocity = Vector2.zero;
-                _rb.AddForce(pushDirection * _pushForce, ForceMode2D.Impulse);
-                // Debug.Log("Толчок игрока в направлении: " + pushDirection);
+                Debug.Log("should push");
+                _pushDirection = normal.normalized;
+                _isTouchingWall = true;
             }
         }
     }

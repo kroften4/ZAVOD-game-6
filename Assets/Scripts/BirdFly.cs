@@ -38,8 +38,8 @@ public class BirdFly : MonoBehaviour
 
     private bool isDistant()
     {
-        if (_startPositionX > 0) return Math.Abs(transform.localPosition.x) >= _startPositionX;
-        return transform.localPosition.x >= Math.Abs(_startPositionX);
+        if (_startPositionX > 0) return Math.Abs(transform.localPosition.x) > _startPositionX;
+        return transform.localPosition.x > Math.Abs(_startPositionX);
     }
 
     private bool isCollisionWithWall()
@@ -49,14 +49,13 @@ public class BirdFly : MonoBehaviour
 
     private bool isReadyToFlip()
     {
-        return isDistant();
+        return isDistant() || isCollisionWithWall();
     }
 
     private void Flip()
     {
         float pivotDistance = -_center.localPosition.x;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        transform.position += -ForwardVector * (pivotDistance - 0.1f);
     }
 
 

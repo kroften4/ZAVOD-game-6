@@ -30,23 +30,19 @@ public class MovePlayer : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow) && _isTouchingWall)
         {
-            Debug.Log("pushing");
-            Debug.Log(_pushDirection);
             _rb.linearVelocity = Vector2.zero;
             _rb.AddForce(_pushDirection * _pushForce, ForceMode2D.Impulse);
         }
         _isTouchingWall = false;
     }
 
-    // отталкивание от стенок не работает
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
             Vector2 normal = collision.contacts[0].normal;
-            if (Mathf.Abs(normal.x) > Mathf.Abs(normal.y)) //определяем, что сталкиваемся именно "боком" игрока с платформой
+            if (Mathf.Abs(normal.x) > Mathf.Abs(normal.y))
             {
-                Debug.Log("should push");
                 _pushDirection = normal.normalized;
                 _isTouchingWall = true;
             }

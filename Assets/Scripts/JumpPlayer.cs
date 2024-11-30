@@ -5,7 +5,7 @@ public class JumpPlayer : MonoBehaviour
     [SerializeField] private LayerMask _platformsLayer;
     [SerializeField] private float _jumpForce = 5f;
     private Rigidbody2D _rb;
-    private bool _isGround;
+    public bool _isGround;
     private bool _doubleJump = false;
 
     private void Awake()
@@ -35,9 +35,9 @@ public class JumpPlayer : MonoBehaviour
         _rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (((1 << collision.gameObject.layer) & _platformsLayer) != 0)
+        if (collision.gameObject.CompareTag("Platform"))
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
@@ -53,7 +53,7 @@ public class JumpPlayer : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (((1 << collision.gameObject.layer) & _platformsLayer) != 0)
+        if (collision.gameObject.CompareTag("Platform"))
         {
             _isGround = false;
         }

@@ -1,51 +1,106 @@
+using System;
 using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    [SerializeField] private float _speed = 4f;
-    [SerializeField] float _pushForce = 10f;
+    [SerializeField] private float _moveSpeed = 4;
+    [SerializeField] private float _jumpForce = 12.5f;
+    [SerializeField] private float _maxJumpAmount = 2;
+    private Vector2 _input;
     private Rigidbody2D _rb;
-    private Vector2 _pushDirection;
-    private bool _isTouchingWall;
+    private float _borderOffsetX;
+    private float _borderOffsetY;
+    [SerializeField] private float _groundRaycastLength = 0.02f;
+    [SerializeField] private float _wallRaycastLength = 0.02f;
+    [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] private int _timesJumped = 0;
 
     void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();  
+        _rb = GetComponent<Rigidbody2D>();
+        _borderOffsetX = GetComponent<Collider2D>().bounds.extents.x;
+        _borderOffsetY = GetComponent<Collider2D>().bounds.extents.y;
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            _rb.linearVelocityX = _speed;
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            _rb.linearVelocityX = -_speed;
-        }
+        bool rightArrow = Input.GetKey(KeyCode.RightArrow),
+            leftArrow = Input.GetKey(KeyCode.LeftArrow);
+        if (leftArrow && rightArrow)
+            _input.x = 0;
+        else if (leftArrow)
+            _input.x = -1;
+        else if (rightArrow)
+            _input.x = 1;
         else
-        {
-            _rb.linearVelocityX = 0;
-        }
+            _input.x = 0;
 
-        if (Input.GetKey(KeyCode.UpArrow) && _isTouchingWall)
-        {
-            _rb.linearVelocity = Vector2.zero;
-            _rb.AddForce(_pushDirection * _pushForce, ForceMode2D.Impulse);
-        }
-        _isTouchingWall = false;
+        bool upArrow = Input.GetKeyDown(KeyCode.UpArrow);
+        if (upArrow)
+            _input.y = 1;
+        else
+            _input.y = 0;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (IsGrounded())
+            _timesJumped = 0;
+
+        _rb.linearVelocityX = _input.x * _moveSpeed;
+
+        if (_input.y == 1 && _timesJumped < _maxJumpAmount)
         {
-            Vector2 normal = collision.contacts[0].normal;
-            if (Mathf.Abs(normal.x) > Mathf.Abs(normal.y))
-            {
-                _pushDirection = normal.normalized;
-                _isTouchingWall = true;
-            }
+            _rb.linearVelocityY = 0;
+            _rb.AddForceY(_jumpForce, ForceMode2D.Impulse);
+            if (!IsWallOnLeft() && !IsWallOnRight())
+                _timesJumped++;
+            _input.y = 0;
         }
+    }
+
+    private bool IsWallOnLeft()
+    {
+        return Physics2D.Raycast(
+            new Vector2(transform.position.x - _borderOffsetX, transform.position.y),
+            Vector2.left,
+            _wallRaycastLength,
+            _groundLayerMask
+        );
+    }
+
+    private bool IsWallOnRight()
+    {
+        return Physics2D.Raycast(
+            new Vector2(transform.position.x + _borderOffsetX, transform.position.y), 
+            Vector2.right,
+            _wallRaycastLength,
+            _groundLayerMask
+        );
+    }
+
+    private bool IsGrounded()
+    {
+        
+        float _raycastOffsetY = _borderOffsetY;
+        bool hitLeft = Physics2D.Raycast(
+            new Vector2(transform.position.x - _borderOffsetX, transform.position.y - _raycastOffsetY),
+            Vector2.down,
+            _groundRaycastLength,
+            _groundLayerMask
+        );
+        bool hitCenter = Physics2D.Raycast(
+            new Vector2(transform.position.x, transform.position.y - _raycastOffsetY),
+            Vector2.down,
+            _groundRaycastLength,
+            _groundLayerMask
+        );
+        bool hitRight = Physics2D.Raycast(
+            new Vector2(transform.position.x + _borderOffsetX, transform.position.y - _raycastOffsetY),
+            Vector2.down,
+            _groundRaycastLength,
+            _groundLayerMask
+        );
+        return hitLeft || hitCenter || hitRight;
     }
 }

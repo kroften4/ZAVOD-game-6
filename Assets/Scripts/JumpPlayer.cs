@@ -1,9 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JumpPlayer : MonoBehaviour
 {
 
     [SerializeField] private LayerMask _platformsLayer;
+    [SerializeField] private LayerMask _mobsLayer;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _rayDistance = 0.6f;
     private Rigidbody2D _rb;

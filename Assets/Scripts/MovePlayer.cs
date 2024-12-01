@@ -8,9 +8,9 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] private float _maxJumpAmount = 2;
     [SerializeField] private float _wallJumpStrength = 5;
     [SerializeField] private float _wallJumpTime = 0.4f;
-    [SerializeField] private float _wallJumpTimer = 0;
-    [SerializeField] private bool _isWallJumping = false;
-    [SerializeField] private int _wallJumpDirection;
+    private float _wallJumpTimer = 0;
+    private bool _isWallJumping = false;
+    private int _wallJumpDirection;
     private Vector2 _input;
     private Rigidbody2D _rb;
     private float _borderOffsetX;
@@ -18,7 +18,7 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] private float _groundRaycastLength = 0.02f;
     [SerializeField] private float _wallRaycastLength = 0.02f;
     [SerializeField] private LayerMask _groundLayerMask;
-    [SerializeField] private int _timesJumped = 0;
+    private int _timesJumped = 0;
 
     void Awake()
     {

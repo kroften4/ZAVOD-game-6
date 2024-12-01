@@ -60,7 +60,11 @@ public class MovePlayer : MonoBehaviour
             int wallDirection = GetWallDirection();
             if (wallDirection != 0 && !isGrounded)
             {
-                WallJump(wallDirection);
+                _wallJumpTimer = 0;
+                _wallJumpDirection = -wallDirection;
+                _isWallJumping = true;
+                _rb.linearVelocityY = 0;
+                _rb.AddForceY(_jumpStrength, ForceMode2D.Impulse);
             }
             else if (_timesJumped < _maxJumpAmount)
             {
@@ -72,23 +76,12 @@ public class MovePlayer : MonoBehaviour
             _input.y = 0;
         }
 
-
-    }
-
-    private void WallJump(int wallDirection)
-    {
-        _wallJumpTimer = 0;
-        _wallJumpDirection = -wallDirection;
-        _isWallJumping = true;
-        _rb.linearVelocityY = 0;
-        _rb.AddForceY(_jumpStrength, ForceMode2D.Impulse);
-
         if (_isWallJumping)
         {
             _rb.linearVelocityX = _wallJumpDirection * _wallJumpStrength;
             _wallJumpTimer += Time.fixedDeltaTime;
-            if (_wallJumpTimer >= _wallJumpTime)
-            {
+            if (_wallJumpTimer >= _wallJumpTime) 
+            { 
                 _isWallJumping = false;
                 _wallJumpTimer = 0;
             }

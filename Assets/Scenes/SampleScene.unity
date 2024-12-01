@@ -706,6 +706,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _jumpForce: 12.5
+  _maxJumpAmount: 2
+  _groundRaycastLength: 0.02
+  _wallRaycastLength: 0.02
+  _groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _timesJumped: 0
 --- !u!114 &735307427
 MonoBehaviour:
   m_ObjectHideFlags: 0

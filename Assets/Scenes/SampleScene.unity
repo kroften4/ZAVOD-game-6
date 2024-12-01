@@ -563,7 +563,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: b90609dcd8c2a3840ab1eaa60237dfc8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -704,8 +704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97ab26c80c014e48b94267bbcd34323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
-  _pushForce: 10
+  _moveSpeed: 4
+  _jumpForce: 12.5
 --- !u!114 &735307427
 MonoBehaviour:
   m_ObjectHideFlags: 0

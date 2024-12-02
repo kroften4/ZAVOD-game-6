@@ -8,10 +8,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxJumpAmount = 2;
     [SerializeField] private float _wallJumpStrength = 5;
     [SerializeField] private float _wallJumpTime = 0.4f;
+
     private float _wallJumpTimer = 0;
     private bool _isWallJumping = false;
     private int _wallJumpDirection;
+
     private Vector2 _input;
+    private bool _leftBtn = false;
+    private bool _rightBtn = false;
+    private bool _jumpBtn = false;
+
     private Rigidbody2D _rb;
     private float _borderOffsetX;
     private float _borderOffsetY;
@@ -27,10 +33,35 @@ public class PlayerController : MonoBehaviour
         _borderOffsetY = GetComponent<Collider2D>().bounds.extents.y;
     }
 
+    public void LeftBtnDown()
+    {
+        _leftBtn = true;
+    }
+
+    public void LeftBtnUp()
+    {
+        _leftBtn = false;
+    }
+
+    public void RightBtnDown()
+    {
+        _rightBtn = true;
+    }
+    
+    public void RightBtnUp()
+    {
+        _rightBtn = false;
+    }
+    
+    public void JumpBtnClick()
+    {
+        _jumpBtn = true;
+    }
+
     void Update()
     {
-        bool rightArrow = Input.GetKey(KeyCode.RightArrow),
-            leftArrow = Input.GetKey(KeyCode.LeftArrow);
+        bool rightArrow = Input.GetKey(KeyCode.RightArrow) || _rightBtn,
+            leftArrow = Input.GetKey(KeyCode.LeftArrow) || _leftBtn;
         if (leftArrow && rightArrow)
             _input.x = 0;
         else if (leftArrow)
@@ -40,7 +71,8 @@ public class PlayerController : MonoBehaviour
         else
             _input.x = 0;
 
-        bool upArrow = Input.GetKeyDown(KeyCode.UpArrow);
+        bool upArrow = Input.GetKeyDown(KeyCode.UpArrow) || _jumpBtn;
+        _jumpBtn = false;
         if (upArrow)
             _input.y = 1;
         else

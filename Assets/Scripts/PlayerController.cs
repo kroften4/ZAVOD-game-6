@@ -53,14 +53,9 @@ public class PlayerController : MonoBehaviour
         _rightBtn = false;
     }
     
-    public void JumpBtnDown()
+    public void JumpBtnClick()
     {
         _jumpBtn = true;
-    }
-
-    public void JumpBtnUp()
-    {
-        _jumpBtn = false;
     }
 
     void Update()
@@ -77,6 +72,7 @@ public class PlayerController : MonoBehaviour
             _input.x = 0;
 
         bool upArrow = Input.GetKeyDown(KeyCode.UpArrow) || _jumpBtn;
+        _jumpBtn = false;
         if (upArrow)
             _input.y = 1;
         else

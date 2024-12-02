@@ -7,7 +7,6 @@ public class BirdFly : MonoBehaviour
 {
 
     [SerializeField] private float _moveSpeed = 2;
-    [SerializeField] private Transform _center;
     [SerializeField] private float _distToWall = 1.0f;
     [SerializeField] private LayerMask _platformsLayer;
     [SerializeField] private float _flyingDistance = 20f;
@@ -41,7 +40,7 @@ public class BirdFly : MonoBehaviour
 
     private bool IsCollisionWithWall()
     {
-        return Physics2D.Raycast(_center.position, ForwardVector, _distToWall, _platformsLayer);
+        return Physics2D.Raycast(transform.position, ForwardVector, _distToWall, _platformsLayer);
     }
 
     

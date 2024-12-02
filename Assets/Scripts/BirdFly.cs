@@ -1,7 +1,5 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class BirdFly : MonoBehaviour
 {
@@ -50,5 +48,12 @@ public class BirdFly : MonoBehaviour
             Flip();
             _startPositionX = transform.position.x;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Vector2 from = new(transform.position.x - _flyingDistance, transform.position.y);
+        Vector2 to = new(transform.position.x + _flyingDistance, transform.position.y);
+        Gizmos.DrawLine(from, to);
     }
 }

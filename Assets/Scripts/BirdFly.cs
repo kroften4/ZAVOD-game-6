@@ -9,7 +9,7 @@ public class BirdFly : MonoBehaviour
     [SerializeField] private LayerMask _platformsLayer;
     [SerializeField] private float _flyingDistance = 20f;
 
-    private float _startPositionX;
+    private float? _startPositionX = null;
 
     private Vector3 ForwardVector
     {
@@ -28,7 +28,7 @@ public class BirdFly : MonoBehaviour
 
     private bool IsDistant()
     {
-        return Math.Abs(transform.position.x - _startPositionX) > _flyingDistance;
+        return Math.Abs(transform.position.x - _startPositionX.Value) > _flyingDistance;
     }
 
     private bool IsCollisionWithWall()
@@ -46,14 +46,14 @@ public class BirdFly : MonoBehaviour
         if (IsDistant() || IsCollisionWithWall())
         {
             Flip();
-            _startPositionX = transform.position.x;
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Vector2 from = new(transform.position.x - _flyingDistance, transform.position.y);
-        Vector2 to = new(transform.position.x + _flyingDistance, transform.position.y);
+        float startPosX = _startPositionX ?? transform.position.x;
+        Vector2 from = new(startPosX - _flyingDistance, transform.position.y);
+        Vector2 to = new(startPosX + _flyingDistance, transform.position.y);
         Gizmos.DrawLine(from, to);
     }
 }

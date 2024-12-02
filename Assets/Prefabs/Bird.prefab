@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3661184739678604848}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.39433, y: 3.5098362, z: 0}
+  m_LocalPosition: {x: 12.427145, y: 3.1522896, z: 0}
   m_LocalScale: {x: 0.9645318, y: 0.91659755, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130,6 +130,7 @@ MonoBehaviour:
   _platformsLayer:
     serializedVersion: 2
     m_Bits: 64
+  _flyingDistance: 20
 --- !u!60 &2946609966612299254
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -11,26 +11,21 @@ public class BirdFly : MonoBehaviour
     [SerializeField] private LayerMask _platformsLayer;
     [SerializeField] private float _flyingDistance = 20f;
 
-    private Rigidbody2D _rb;
     private float _startPositionX;
-
 
     private Vector3 ForwardVector
     {
         get => (-transform.right * transform.lossyScale.x).normalized;
     }
 
-
-
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        Collider2D collider = GetComponent<Collider2D>();
         _startPositionX = transform.position.x;
     }
+
     private void Update()
     {
-        transform.position += ForwardVector * _moveSpeed * Time.deltaTime;
+        transform.position += _moveSpeed * Time.deltaTime * ForwardVector;
     }
 
     private bool IsDistant()
@@ -43,14 +38,10 @@ public class BirdFly : MonoBehaviour
         return Physics2D.Raycast(transform.position, ForwardVector, _distToWall, _platformsLayer);
     }
 
-    
-
     private void Flip()
     {
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
     }
-
 
     private void FixedUpdate()
     {
@@ -60,9 +51,4 @@ public class BirdFly : MonoBehaviour
             _startPositionX = transform.position.x;
         }
     }
-
-
-
-
-
 }

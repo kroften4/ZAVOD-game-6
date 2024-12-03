@@ -68,15 +68,11 @@ public class PlayerController : MonoBehaviour
             _input.x = -1;
         else if (rightArrow)
             _input.x = 1;
-        else
-            _input.x = 0;
 
         bool upArrow = Input.GetKeyDown(KeyCode.UpArrow) || _jumpBtn;
         _jumpBtn = false;
         if (upArrow)
-            _input.y = 1;
-        else
-            _input.y = 0;
+            _input.y = 1;            
     }
 
     private void FixedUpdate()
@@ -118,6 +114,9 @@ public class PlayerController : MonoBehaviour
                 _wallJumpTimer = 0;
             }
         }
+
+        _input.x = 0;
+        _input.y = 0;
     }
 
     private int GetWallDirection()

@@ -6,8 +6,10 @@ public class GetDamage : MonoBehaviour
 {
     private Rigidbody2D _rb;
     [SerializeField] private int _hp = 10;
-    [SerializeField] private Vector2 _forceDigit = new Vector2(0f, 5f);
+    [SerializeField] private float _forceDigit = 10f;
     [SerializeField] private Text _health;
+    [SerializeField] private bool _isInvincible = false;
+    [SerializeField] private float _invincibleTime = 1;
 
     private void Awake()
     {
@@ -21,29 +23,38 @@ public class GetDamage : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            StartCoroutine(ToDamage());
+            LoseHealth();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            StopAllCoroutines();
-        }
+
+
+    private IEnumerator BecomeInvincible()
+    {         
+        _isInvincible = true;
+        yield return new WaitForSeconds(_invincibleTime);
+
+        _isInvincible = false;        
     }
 
-    private IEnumerator ToDamage()
+    private void LoseHealth()
     {
-        while (_hp > 0)
+        if (_isInvincible) return;
+        
+        _rb.linearVelocityY = 0f;
+        _hp -= 1;       
+        _rb.AddForceY(_forceDigit, ForceMode2D.Impulse);
+
+        if (_hp <= 0)
         {
-            _hp -= 1;
-            _rb.AddForce(_forceDigit, ForceMode2D.Impulse);
-            yield return new WaitForSeconds(1.0f);
+            _hp = 0;
+            return;
         }
+
+        StartCoroutine(BecomeInvincible());
     }
 }

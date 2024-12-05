@@ -2,7 +2,7 @@ using UnityEditor.Rendering;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class KillMobs : MonoBehaviour
+public class DieMobs : MonoBehaviour
 {
 
     private float _playerFeetOffset;

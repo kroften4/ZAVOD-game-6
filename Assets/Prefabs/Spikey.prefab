@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3233053931676489514}
   - component: {fileID: 4486177478803000869}
   - component: {fileID: 3711075936147806779}
+  - component: {fileID: -5755820400454747428}
   m_Layer: 0
   m_Name: Spikey
   m_TagString: Enemy
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4160364048113892326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.901, y: 1, z: 0}
+  m_LocalPosition: {x: -2.4999564, y: 1.5000061, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -189,6 +190,21 @@ MonoBehaviour:
   _platformsLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &-5755820400454747428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160364048113892326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea1bc000c1f2d24abd890e945e875d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heightForKillMobs: 0.6
+  _playerTag: Player
+  _forceValue: 15
 --- !u!1 &8227694156883002488
 GameObject:
   m_ObjectHideFlags: 0

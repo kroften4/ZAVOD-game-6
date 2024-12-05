@@ -23,8 +23,6 @@ public class KillMobs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"_mobOffset {_mobOffset}, transform.TransformPoint(_col.bounds.center).y {transform.TransformPoint(_col.bounds.center).y}, other.transform.position.y - _playerFeetOffset {other.transform.position.y - _playerFeetOffset}, _col.bounds.center {_col.bounds.center}");
-
         if (other.transform.position.y - _playerFeetOffset > _col.bounds.center.y + _mobOffset && _playerRb.linearVelocityY < 0 && other.CompareTag(_playerTag))
         {
             Destroy(gameObject);

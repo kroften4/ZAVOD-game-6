@@ -26,11 +26,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerMask;
     private int _timesJumped = 0;
 
+    AudioManager _audioManager;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _borderOffsetX = GetComponent<Collider2D>().bounds.extents.x;
         _borderOffsetY = GetComponent<Collider2D>().bounds.extents.y;
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     public void LeftBtnDown()
@@ -96,6 +99,9 @@ public class PlayerController : MonoBehaviour
             }
             else if (_timesJumped < _maxJumpAmount)
             {
+                _audioManager.PlaySFX(_audioManager._jump);
+                if (_timesJumped == 0) _audioManager.PlaySFX(_audioManager._jumpScream); // не знаю, нужно ли второй раз стон при двойном прыжке
+
                 _timesJumped++;
                 _rb.linearVelocityY = 0;
                 _rb.AddForceY(_jumpStrength, ForceMode2D.Impulse);

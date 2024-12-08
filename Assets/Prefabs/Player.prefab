@@ -12,7 +12,10 @@ GameObject:
   - component: {fileID: 6691565941785102113}
   - component: {fileID: 6925440510796568892}
   - component: {fileID: 213765963594428786}
+  - component: {fileID: -4768053994223512148}
   - component: {fileID: 7339223765983503455}
+  - component: {fileID: -8501320147099302514}
+  - component: {fileID: 2332309048879640712}
   - component: {fileID: 7159354996272875671}
   m_Layer: 0
   m_Name: Player
@@ -166,6 +169,18 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &-4768053994223512148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5319862108517530038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664e62f1ec130c2469e99eeebffaf31a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7339223765983503455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,10 +194,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 4
-  _jumpStrength: 12.5
-  _maxJumpAmount: 2
-  _wallJumpStrength: 5
+  _normalJumpStrength: 12.5
+  _boostedJumpStrength: 16
+  _maxAirJumpAmount: 1
+--- !u!114 &-8501320147099302514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5319862108517530038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2c2adda19ad00449bd02bf2b50f7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wallJumpPushStrength: 5
   _wallJumpTime: 0.4
+  _wallSlideSpeed: 3
+--- !u!114 &2332309048879640712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5319862108517530038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45be19b991f61714d8145b703cca56ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _groundRaycastLength: 0.02
   _wallRaycastLength: 0.02
   _groundLayerMask:

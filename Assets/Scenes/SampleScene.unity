@@ -3047,8 +3047,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 619394802}
   - {fileID: 2073463660}
-  - {fileID: 7990466840861583895}
-  - {fileID: 2073529994}
   - {fileID: 470265712}
   - {fileID: 6573006}
   - {fileID: 1339164482}

@@ -32,9 +32,4 @@ public class Wind : MonoBehaviour
         if (_isWinding)
             _rb.AddForce(_windDirection * _windStrength);
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawRay(transform.position, _windDirection * 2);
-    }
 }

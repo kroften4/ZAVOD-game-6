@@ -278,7 +278,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 735307424}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
           m_MethodName: RightBtnDown
           m_Mode: 1
@@ -294,7 +294,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 735307424}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
           m_MethodName: RightBtnUp
           m_Mode: 1
@@ -572,7 +572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75.63442, y: -27.253876}
+  m_AnchoredPosition: {x: -75.63443, y: -27.253906}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528076916
@@ -831,17 +831,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &735307424 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7339223765983503455, guid: b9add8587cb37df41b4483e0e4de5f24, type: 3}
-  m_PrefabInstance: {fileID: 7990466840861583895}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97ab26c80c014e48b94267bbcd34323, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &738742916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,7 +2214,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 735307424}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
           m_MethodName: LeftBtnDown
           m_Mode: 1
@@ -2241,7 +2230,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 735307424}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
           m_MethodName: LeftBtnUp
           m_Mode: 1
@@ -2578,7 +2567,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 735307424}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: JumpBtnClick
         m_Mode: 1
@@ -3036,7 +3025,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5170886767354016124, guid: b9add8587cb37df41b4483e0e4de5f24, type: 3}
+    - {fileID: 6086699450468150894, guid: b9add8587cb37df41b4483e0e4de5f24, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3057,3 +3048,5 @@ SceneRoots:
   - {fileID: 249237485}
   - {fileID: 453351993}
   - {fileID: 937189485}
+  - {fileID: 7990466840861583895}
+  - {fileID: 2073529994}

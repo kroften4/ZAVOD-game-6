@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
             _rb.linearVelocityY = 0;
             _rb.AddForceY(CurrentJumpStrength, ForceMode2D.Impulse);
         }
-        else if (_timesAirJumped < _maxAirJumpAmount)
+        else if (_groundChecker.GetWallDirection() == 0 && _timesAirJumped < _maxAirJumpAmount)
         {
             _timesAirJumped++;
             _rb.linearVelocityY = 0;

@@ -13,6 +13,8 @@ public class SpikeyCrawl : MonoBehaviour
 
     private Rigidbody2D _rb;
 
+    AudioManager _audioManager;
+
     private Vector3 ForwardVector
     {
         get => (-transform.right * transform.lossyScale.x).normalized;
@@ -27,6 +29,7 @@ public class SpikeyCrawl : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         Collider2D collider = GetComponent<Collider2D>();
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -80,11 +83,13 @@ public class SpikeyCrawl : MonoBehaviour
             else
             {
                 Rotate();
+                // _audioManager.PlaySFX(_audioManager._mobs); // некоторые мобы слишком часто поворачивают это звучит не очень-то хорошо
             }
         }
 
         if (IsHittingWall())
         {
+            _audioManager.PlaySFX(_audioManager._mobs);
             if (_onlyMoveLeftRight)
                 Flip();
             else

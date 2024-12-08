@@ -2,17 +2,20 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
+using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput), typeof(GroundChecker))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 4;
-    [SerializeField] private float _groundXAcceleration = 10;
+    [SerializeField] private float _moveSpeed = 42;
+    [SerializeField] private float _xAxisDumping = 10;
+    private float _xInput;
 
     [Header("Jumping")]
     [SerializeField] private float _normalJumpStrength = 12.5f;
     [SerializeField] private float _boostedJumpStrength = 16f;
     [SerializeField] private float _maxAirJumpAmount = 1;
+
 
 
     public float CurrentJumpStrength { get; private set; }
@@ -50,15 +53,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnMovement(InputValue value)
     {
-        _rb.linearVelocityX = value.Get<float>() * _moveSpeed;
+        _xInput = value.Get<float>();
     }
     
     private void OnJump()
     {
-        Debug.Log("onJump");
         if (_groundChecker.IsGrounded())
         {
-            Debug.Log("jumping");
             _rb.linearVelocityY = 0;
             _rb.AddForceY(CurrentJumpStrength, ForceMode2D.Impulse);
         }
@@ -74,5 +75,8 @@ public class PlayerController : MonoBehaviour
     {
         if (_groundChecker.IsGrounded())
             _timesAirJumped = 0;
+
+        _rb.AddForceX(_xInput * _moveSpeed);
+        _rb.AddForceX(-_rb.linearVelocityX * _xAxisDumping);
     }
 }

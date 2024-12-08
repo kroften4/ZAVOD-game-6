@@ -1,169 +1,82 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
+using static UnityEngine.Rendering.DebugUI;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput), typeof(GroundChecker))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 4;
-    [SerializeField] private float _jumpStrength = 12.5f;
-    [SerializeField] private float _maxJumpAmount = 2;
-    [SerializeField] private float _wallJumpStrength = 5;
-    [SerializeField] private float _wallJumpTime = 0.4f;
+    [SerializeField] private float _moveSpeed = 42;
+    [SerializeField] private float _xAxisDumping = 10;
+    private float _xInput;
 
-    private float _wallJumpTimer = 0;
-    private bool _isWallJumping = false;
-    private int _wallJumpDirection;
+    [Header("Jumping")]
+    [SerializeField] private float _normalJumpStrength = 12.5f;
+    [SerializeField] private float _boostedJumpStrength = 16f;
+    [SerializeField] private float _maxAirJumpAmount = 1;
 
-    private Vector2 _input;
-    private bool _leftBtn = false;
-    private bool _rightBtn = false;
-    private bool _jumpBtn = false;
 
+
+    public float CurrentJumpStrength { get; private set; }
+    private int _timesAirJumped = 0;
     private Rigidbody2D _rb;
-    private float _borderOffsetX;
-    private float _borderOffsetY;
-    [SerializeField] private float _groundRaycastLength = 0.02f;
-    [SerializeField] private float _wallRaycastLength = 0.02f;
-    [SerializeField] private LayerMask _groundLayerMask;
-    private int _timesJumped = 0;
+    private GroundChecker _groundChecker;
+
+    public void OnEnableDoubleJump()
+    {
+        _maxAirJumpAmount = 1;
+    }
+    
+    public void OnDisableDoubleJump()
+    {
+        _maxAirJumpAmount = 0;
+    }
+
+    public void OnEnableSpringyBoots()
+    {
+        CurrentJumpStrength = _boostedJumpStrength;
+    }
+    
+    public void OnDisableSpringyBoots()
+    {
+        CurrentJumpStrength = _normalJumpStrength;
+    }
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _borderOffsetX = GetComponent<Collider2D>().bounds.extents.x;
-        _borderOffsetY = GetComponent<Collider2D>().bounds.extents.y;
+        _groundChecker = GetComponent<GroundChecker>();
+
+        CurrentJumpStrength = _normalJumpStrength;
     }
 
-    public void LeftBtnDown()
+    private void OnMovement(InputValue value)
     {
-        _leftBtn = true;
-    }
-
-    public void LeftBtnUp()
-    {
-        _leftBtn = false;
-    }
-
-    public void RightBtnDown()
-    {
-        _rightBtn = true;
+        _xInput = value.Get<float>();
     }
     
-    public void RightBtnUp()
+    private void OnJump()
     {
-        _rightBtn = false;
-    }
-    
-    public void JumpBtnClick()
-    {
-        _jumpBtn = true;
-    }
-
-    void Update()
-    {
-        bool rightArrow = Input.GetKey(KeyCode.RightArrow) || _rightBtn,
-            leftArrow = Input.GetKey(KeyCode.LeftArrow) || _leftBtn;
-        if (leftArrow && rightArrow)
-            _input.x = 0;
-        else if (leftArrow)
-            _input.x = -1;
-        else if (rightArrow)
-            _input.x = 1;
-
-        bool upArrow = Input.GetKeyDown(KeyCode.UpArrow) || _jumpBtn;
-        _jumpBtn = false;
-        if (upArrow)
-            _input.y = 1;            
+        if (_groundChecker.IsGrounded())
+        {
+            _rb.linearVelocityY = 0;
+            _rb.AddForceY(CurrentJumpStrength, ForceMode2D.Impulse);
+        }
+        else if (_groundChecker.GetWallDirection() == 0 && _timesAirJumped < _maxAirJumpAmount)
+        {
+            _timesAirJumped++;
+            _rb.linearVelocityY = 0;
+            _rb.AddForceY(CurrentJumpStrength, ForceMode2D.Impulse);
+        }
     }
 
     private void FixedUpdate()
     {
-        bool isGrounded = IsGrounded();
-        if (isGrounded)
-            _timesJumped = 0;
+        if (_groundChecker.IsGrounded())
+            _timesAirJumped = 0;
 
-        _rb.linearVelocityX = _input.x * _moveSpeed;
-
-        if (_input.y == 1)
-        {
-            int wallDirection = GetWallDirection();
-            if (wallDirection != 0 && !isGrounded)
-            {
-                _wallJumpTimer = 0;
-                _wallJumpDirection = -wallDirection;
-                _isWallJumping = true;
-                _rb.linearVelocityY = 0;
-                _rb.AddForceY(_jumpStrength, ForceMode2D.Impulse);
-            }
-            else if (_timesJumped < _maxJumpAmount)
-            {
-                _timesJumped++;
-                _rb.linearVelocityY = 0;
-                _rb.AddForceY(_jumpStrength, ForceMode2D.Impulse);
-            }
-
-            _input.y = 0;
-        }
-
-        if (_isWallJumping)
-        {
-            _rb.linearVelocityX = _wallJumpDirection * _wallJumpStrength;
-            _wallJumpTimer += Time.fixedDeltaTime;
-            if (_wallJumpTimer >= _wallJumpTime) 
-            { 
-                _isWallJumping = false;
-                _wallJumpTimer = 0;
-            }
-        }
-
-        _input.x = 0;
-        _input.y = 0;
-    }
-
-    private int GetWallDirection()
-    {
-        bool leftWall = Physics2D.Raycast(
-            new Vector2(transform.position.x - _borderOffsetX, transform.position.y),
-            Vector2.left,
-            _wallRaycastLength,
-            _groundLayerMask
-        );
-        bool rightWall = Physics2D.Raycast(
-          new Vector2(transform.position.x + _borderOffsetX, transform.position.y),
-          Vector2.right,
-          _wallRaycastLength,
-          _groundLayerMask
-        );
-
-
-        if (leftWall)
-            return -1;
-        if (rightWall)
-            return 1;
-        return 0;
-    }
-
-    private bool IsGrounded()
-    {
-        
-        float _raycastOffsetY = _borderOffsetY;
-        bool hitLeft = Physics2D.Raycast(
-            new Vector2(transform.position.x - _borderOffsetX, transform.position.y - _raycastOffsetY),
-            Vector2.down,
-            _groundRaycastLength,
-            _groundLayerMask
-        );
-        bool hitCenter = Physics2D.Raycast(
-            new Vector2(transform.position.x, transform.position.y - _raycastOffsetY),
-            Vector2.down,
-            _groundRaycastLength,
-            _groundLayerMask
-        );
-        bool hitRight = Physics2D.Raycast(
-            new Vector2(transform.position.x + _borderOffsetX, transform.position.y - _raycastOffsetY),
-            Vector2.down,
-            _groundRaycastLength,
-            _groundLayerMask
-        );
-        return hitLeft || hitCenter || hitRight;
+        _rb.AddForceX(_xInput * _moveSpeed);
+        _rb.AddForceX(-_rb.linearVelocityX * _xAxisDumping);
     }
 }

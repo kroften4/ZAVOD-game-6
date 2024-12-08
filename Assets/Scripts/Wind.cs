@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Wind : MonoBehaviour
 {
-    [SerializeField] public float _windStrength = 5f;
-    [SerializeField] public float _changeInterval = 3f;
+    public float _windStrength = 5f;
+    public float _windInterval = 3f;
+    private bool _isWinding = false;
 
 
     private Vector2 _windDirection;
@@ -14,7 +15,7 @@ public class Wind : MonoBehaviour
     void Start()
     {
         _rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        InvokeRepeating("ChangeWindDirection", 0f, _changeInterval);
+        InvokeRepeating(nameof(ChangeWindDirection), 0f, _windInterval);
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
@@ -22,12 +23,18 @@ public class Wind : MonoBehaviour
     {
         float angle = Random.Range(0f, 360f);
         _windDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)).normalized;
-        ApplyWindForce();
         _audioManager.PlaySFX(_audioManager._wind);
+        _isWinding = !_isWinding;
     }
 
-    void ApplyWindForce()
+    private void FixedUpdate()
     {
-        _rb.AddForce(_windDirection * _windStrength, ForceMode2D.Force);
+        if (_isWinding)
+            _rb.AddForce(_windDirection * _windStrength);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawRay(transform.position, _windDirection * 2);
     }
 }

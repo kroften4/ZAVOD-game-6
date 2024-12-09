@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6086699450468150894}
   - component: {fileID: 3154424968791613473}
   - component: {fileID: 4508167514326884578}
+  - component: {fileID: 5892422093207375378}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -33,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 5319862108517530038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.44, y: -0.93, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -130,7 +131,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.02600339}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -140,7 +141,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6278063, y: 0.9479932}
   m_EdgeRadius: 0
 --- !u!50 &213765963594428786
 Rigidbody2D:
@@ -253,8 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45be19b991f61714d8145b703cca56ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundRaycastLength: 0.02
-  _wallRaycastLength: 0.02
+  _groundRaycastLength: 0.05
+  _wallRaycastLength: 0.05
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -272,6 +273,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wallJumpPushStrength: 27
   _wallSlideSpeed: 3
+--- !u!95 &5892422093207375378
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5319862108517530038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe7b5f3e02f6585429fb1840d0c4e808, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6441527560038289280
 GameObject:
   m_ObjectHideFlags: 0

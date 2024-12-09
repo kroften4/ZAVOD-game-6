@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
-using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput), typeof(GroundChecker))]
 public class PlayerController : MonoBehaviour

@@ -1,5 +1,3 @@
-using TMPro.EditorUtilities;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class SpikeyCrawl : MonoBehaviour

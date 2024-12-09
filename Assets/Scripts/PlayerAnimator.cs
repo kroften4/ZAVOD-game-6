@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(GroundChecker))]
 [RequireComponent(typeof(PlayerInput), typeof(SpriteRenderer))]

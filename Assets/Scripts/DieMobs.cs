@@ -1,5 +1,3 @@
-using UnityEditor.Rendering;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class DieMobs : MonoBehaviour

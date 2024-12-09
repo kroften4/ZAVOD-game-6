@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerController), typeof(PlayerInput), typeof(GroundChecker))]
 public class PlayerWallMechanics : MonoBehaviour
 {
-    [SerializeField] private float _wallJumpPushStrength = 5;
+    [SerializeField] private float _wallJumpPushStrength = 27;
     [SerializeField] private float _wallSlideSpeed = 3;
     private int _wallJumpDirection;
     private Rigidbody2D _rb;

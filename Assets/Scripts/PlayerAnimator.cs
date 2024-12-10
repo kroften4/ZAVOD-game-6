@@ -11,6 +11,7 @@ public class PlayerAnimator : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Vector2 _linearVelocity;
     private bool _isHuggingWall;
+    private int _wallDirection;
     private float _xInput;
 
     private void Start()
@@ -45,11 +46,24 @@ public class PlayerAnimator : MonoBehaviour
                 _animator.SetBool("RightKey", false);
                 break;
         }
+        if (_isHuggingWall)
+        {
+            switch (_wallDirection)
+            {
+                case -1:
+                    _spriteRenderer.flipX = true;
+                    break;
+                case 1:
+                    _spriteRenderer.flipX = false;
+                    break;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        _isHuggingWall = _groundChecker.GetWallDirection() != 0 && !_groundChecker.IsGrounded();
+        _wallDirection = _groundChecker.GetWallDirection();
         _linearVelocity = _rb.linearVelocity;
+        _isHuggingWall = _wallDirection != 0 && !_groundChecker.IsGrounded();
     }
 }

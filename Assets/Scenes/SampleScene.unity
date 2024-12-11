@@ -186,6 +186,8 @@ GameObject:
   m_Component:
   - component: {fileID: 249237485}
   - component: {fileID: 249237484}
+  - component: {fileID: 249237486}
+  - component: {fileID: 249237487}
   m_Layer: 0
   m_Name: CardsEffects
   m_TagString: Untagged
@@ -222,6 +224,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &249237486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249237483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0102aea5de1c3904fb592f71c9a7be40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 0
+--- !u!114 &249237487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249237483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267c7dad5e3dfda4a9d7632b19dbfb4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 0
 --- !u!1 &378477634
 GameObject:
   m_ObjectHideFlags: 0
@@ -3496,7 +3524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6435963631988060919, guid: b9add8587cb37df41b4483e0e4de5f24, type: 3}
       propertyPath: orthographic size
-      value: 6.6666665
+      value: 7.71875
       objectReference: {fileID: 0}
     - target: {fileID: 6435963631988060919, guid: b9add8587cb37df41b4483e0e4de5f24, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
@@ -3516,6 +3544,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6850029877740358803, guid: b9add8587cb37df41b4483e0e4de5f24, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159354996272875671, guid: b9add8587cb37df41b4483e0e4de5f24, type: 3}
+      propertyPath: _isWeakness
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

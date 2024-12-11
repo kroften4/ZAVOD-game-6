@@ -7,10 +7,12 @@ public class GetDamage : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField] private int _hp = 10;
     [SerializeField] private float _forceBounceValue = 10f;
+    [SerializeField] private float _forceBounceValueForWeakness = 15f;
     [SerializeField] private Text _health;
     [SerializeField] private bool _isInvincible = false;
     [SerializeField] private float _invincibleTime = 1;
     [SerializeField] public bool _isGodMod;
+    [SerializeField] public bool _isWeakness;
 
     private void Awake()
     {
@@ -53,7 +55,10 @@ public class GetDamage : MonoBehaviour
 
             _rb.linearVelocityY = 0f;
             _hp -= 1;
-            _rb.AddForceY(_forceBounceValue, ForceMode2D.Impulse);
+            if (_isWeakness == false)
+                _rb.AddForceY(_forceBounceValue, ForceMode2D.Impulse);
+            else
+                _rb.AddForceY(_forceBounceValueForWeakness, ForceMode2D.Impulse);
 
             if (_hp <= 0)
             {

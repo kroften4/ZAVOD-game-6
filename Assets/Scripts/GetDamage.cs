@@ -10,6 +10,7 @@ public class GetDamage : MonoBehaviour
     [SerializeField] private Text _health;
     [SerializeField] private bool _isInvincible = false;
     [SerializeField] private float _invincibleTime = 1;
+    [SerializeField] public bool _isGodMod;
 
     private void Awake()
     {
@@ -35,26 +36,32 @@ public class GetDamage : MonoBehaviour
 
     private IEnumerator BecomeInvincible()
     {         
-        _isInvincible = true;
-        yield return new WaitForSeconds(_invincibleTime);
+        if(_isGodMod == false)
+        {
+            _isInvincible = true;
+            yield return new WaitForSeconds(_invincibleTime);
 
-        _isInvincible = false;        
+            _isInvincible = false;
+        }
     }
 
     private void LoseHealth()
     {
-        if (_isInvincible) return;
-        
-        _rb.linearVelocityY = 0f;
-        _hp -= 1;       
-        _rb.AddForceY(_forceBounceValue, ForceMode2D.Impulse);
-
-        if (_hp <= 0)
+        if (_isGodMod == false)
         {
-            _hp = 0;
-            return;
-        }
+            if (_isInvincible) return;
 
-        StartCoroutine(BecomeInvincible());
+            _rb.linearVelocityY = 0f;
+            _hp -= 1;
+            _rb.AddForceY(_forceBounceValue, ForceMode2D.Impulse);
+
+            if (_hp <= 0)
+            {
+                _hp = 0;
+                return;
+            }
+
+            StartCoroutine(BecomeInvincible());
+        }
     }
 }

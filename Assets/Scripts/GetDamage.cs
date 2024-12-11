@@ -28,7 +28,7 @@ public class GetDamage : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") || collision.CompareTag("Trap"))
+        if ((collision.CompareTag("Enemy") || collision.CompareTag("Trap")))
         {
             LoseHealth();
         }

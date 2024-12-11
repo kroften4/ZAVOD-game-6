@@ -10,7 +10,7 @@ public class Weakness : MonoBehaviour
         
     }
 
-    private void Update()
+    void Update()
     {
         if (_enabled == true)
             _getDamage._isWeakness = true;

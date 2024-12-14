@@ -11,9 +11,8 @@ namespace Zavod.Cards
     public class CardData : ScriptableObject
     {
         [SerializeField] private string _name;
-        [SerializeField] private CardType type;
-        [SerializeField] private Sprite sprite;
-        [SerializeField] [TextArea]
-        private string _desription;
+        [SerializeField] private CardType _type;
+        [SerializeField] private Sprite _sprite;
+        [SerializeField] [TextArea] private string _desription;
     }
 }

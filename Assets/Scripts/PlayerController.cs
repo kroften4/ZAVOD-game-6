@@ -9,43 +9,21 @@ public class PlayerController : MonoBehaviour
     private float _xInput;
 
     [Header("Jumping")]
-    [SerializeField] private float _normalJumpStrength = 12.5f;
-    [SerializeField] private float _boostedJumpStrength = 16f;
-    [SerializeField] private float _maxAirJumpAmount = 1;
+    public float NormalJumpStrength = 12.5f ;
+    public float BoostedJumpStrength = 16f;
+    public int MaxAirJumpAmount = 1;
 
-
-
-    public float CurrentJumpStrength { get; private set; }
+    public float CurrentJumpStrength;
     private int _timesAirJumped = 0;
     private Rigidbody2D _rb;
     private GroundChecker _groundChecker;
-
-    public void OnEnableDoubleJump()
-    {
-        _maxAirJumpAmount = 1;
-    }
-    
-    public void OnDisableDoubleJump()
-    {
-        _maxAirJumpAmount = 0;
-    }
-
-    public void OnEnableSpringyBoots()
-    {
-        CurrentJumpStrength = _boostedJumpStrength;
-    }
-    
-    public void OnDisableSpringyBoots()
-    {
-        CurrentJumpStrength = _normalJumpStrength;
-    }
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _groundChecker = GetComponent<GroundChecker>();
 
-        CurrentJumpStrength = _normalJumpStrength;
+        CurrentJumpStrength = NormalJumpStrength;
     }
 
     private void OnMovement(InputValue value)
@@ -60,7 +38,7 @@ public class PlayerController : MonoBehaviour
             _rb.linearVelocityY = 0;
             _rb.AddForceY(CurrentJumpStrength, ForceMode2D.Impulse);
         }
-        else if (_groundChecker.GetWallDirection() == 0 && _timesAirJumped < _maxAirJumpAmount)
+        else if (_groundChecker.GetWallDirection() == 0 && _timesAirJumped < MaxAirJumpAmount)
         {
             _timesAirJumped++;
             _rb.linearVelocityY = 0;

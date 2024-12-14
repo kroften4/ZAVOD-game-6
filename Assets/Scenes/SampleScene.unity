@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 249237485}
-  - component: {fileID: 249237484}
+  - component: {fileID: 249237486}
   m_Layer: 0
   m_Name: CardsEffects
   m_TagString: Untagged
@@ -193,20 +193,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &249237484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249237483}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 914c817ab213149a998b7ff95276592e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _windStrength: 20
-  _windInterval: 3
 --- !u!4 &249237485
 Transform:
   m_ObjectHideFlags: 0
@@ -222,6 +208,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &249237486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249237483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914c817ab213149a998b7ff95276592e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _windStrength: 10
 --- !u!1 &378477634
 GameObject:
   m_ObjectHideFlags: 0

@@ -87,7 +87,11 @@ public class SpikeyCrawl : MonoBehaviour
 
         if (IsHittingWall())
         {
-            _audioManager.PlaySFX(_audioManager._mobs);
+            if (_audioManager._mobs.Length > 0)
+            {
+                int randomIndex = Random.Range(0, _audioManager._mobs.Length);
+                _audioManager.SFXSource.PlayOneShot(_audioManager._mobs[randomIndex]);
+            }
             if (_onlyMoveLeftRight)
                 Flip();
             else

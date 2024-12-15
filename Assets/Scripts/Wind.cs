@@ -27,7 +27,11 @@ public class Wind : MonoBehaviour
             float angle = Random.Range(0f, 360f);
             _windDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Random.value > 0.5f ? Vector2.up.y : Vector2.down.y).normalized;
             _isWinding = true;
-            _audioManager.PlaySFX(_audioManager._wind);
+            if (_audioManager._wind.Length > 0)
+            {
+                int randomIndex = Random.Range(0, _audioManager._wind.Length);
+                _audioManager.SFXSource.PlayOneShot(_audioManager._wind[randomIndex]);
+            }
 
             yield return new WaitForSeconds(windDuration);
 

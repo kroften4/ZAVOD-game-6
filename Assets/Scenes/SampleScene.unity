@@ -399,10 +399,23 @@ MonoBehaviour:
   _musicSource: {fileID: 1684973294}
   SFXSource: {fileID: 1827302933}
   _background: {fileID: 8300000, guid: 57a729ec53ce247fa949161e1a9d7e9f, type: 3}
-  _jump: {fileID: 8300000, guid: e0a7a067db5cc4a6da2ce2eed5b10091, type: 3}
-  _jumpScream: {fileID: 8300000, guid: b0b61c241972e4fe0a7d465307f7792b, type: 3}
-  _mobs: {fileID: 8300000, guid: 0d7e0180771894d4bab8c53df05ebaa7, type: 3}
-  _wind: {fileID: 8300000, guid: 6485f6bd7284b4f5fbbeca5cac1c18ca, type: 3}
+  _jumpSounds:
+  - {fileID: 8300000, guid: e0a7a067db5cc4a6da2ce2eed5b10091, type: 3}
+  _jumpScream:
+  - {fileID: 8300000, guid: 4bcd39a2416374bc2bf3acd967698a1c, type: 3}
+  - {fileID: 8300000, guid: b0b61c241972e4fe0a7d465307f7792b, type: 3}
+  - {fileID: 8300000, guid: 43e75053c1f854d49a4a56c097bcb589, type: 3}
+  - {fileID: 8300000, guid: a2c9f6891f24b4b2dba656ebefbda1bc, type: 3}
+  - {fileID: 8300000, guid: 3401affd71ae24de5b7ed60df5d27d6c, type: 3}
+  - {fileID: 8300000, guid: 81da4159d5fcd49c3be18a20d9ab5b0f, type: 3}
+  - {fileID: 8300000, guid: 6a590c70ff0d9431b9902282b0f122a9, type: 3}
+  _walkSounds:
+  - {fileID: 0}
+  _mobs:
+  - {fileID: 8300000, guid: 0d7e0180771894d4bab8c53df05ebaa7, type: 3}
+  _wind:
+  - {fileID: 8300000, guid: ce8cc347b18494b6b9a5e2872d13045d, type: 3}
+  - {fileID: 8300000, guid: 6485f6bd7284b4f5fbbeca5cac1c18ca, type: 3}
 --- !u!4 &453351993
 Transform:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace Zavod.Cards
         [SerializeField] private CardData _cardData;
         private GameObject _player;
 
-        private void Start()
+        private void Awake()
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             gameObject.SetActive(false);

@@ -6,7 +6,7 @@ public class DoubleJump : MonoBehaviour
     [SerializeField] private CardData _cardData;
     private PlayerController _playerController;
 
-    private void Start()
+    private void Awake()
     {
         _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         gameObject.SetActive(false);

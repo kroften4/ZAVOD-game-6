@@ -9,7 +9,7 @@ namespace Zavod.Cards
         private GameObject _player;
         private Animator _playerAnimator;
 
-        private void Start()
+        private void Awake()
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             _playerAnimator = _player.GetComponent<Animator>();

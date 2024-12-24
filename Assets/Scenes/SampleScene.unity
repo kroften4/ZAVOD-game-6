@@ -221,6 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _windStrength: 10
+  _windPrefab: {fileID: 4597120112208132770, guid: 4203f1f5f4f604f86bf0189e86254c52, type: 3}
+  _windStraightPrefab: {fileID: 8999391150931211209, guid: 5d0846624da784befabbc3b380978b8a, type: 3}
 --- !u!1 &378477634
 GameObject:
   m_ObjectHideFlags: 0

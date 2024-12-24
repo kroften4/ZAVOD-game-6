@@ -3589,7 +3589,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2034518360}
-  - component: {fileID: 2034518359}
   - component: {fileID: 2034518361}
   m_Layer: 0
   m_Name: GameController
@@ -3598,20 +3597,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2034518359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2034518358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee1b0fd549154345961e7f84f5fb6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shopCanvas: {fileID: 0}
-  _interval: 30
 --- !u!4 &2034518360
 Transform:
   m_ObjectHideFlags: 0
@@ -3640,7 +3625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shopCanvas: {fileID: 802691306}
-  _interval: 30
+  _interval: 5
 --- !u!1001 &2057084192
 PrefabInstance:
   m_ObjectHideFlags: 0

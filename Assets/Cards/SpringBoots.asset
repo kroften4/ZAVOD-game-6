@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0eb2d206cdb6f48b70a54384111987, type: 3}
   m_Name: SpringBoots
   m_EditorClassIdentifier: 
-  _name: Spring Boots
-  _type: 1
-  _sprite: {fileID: 0}
-  _desription: Jump higher
+  Name: Spring Boots
+  Type: 0
+  Sprite: {fileID: 2836554479157175418, guid: 340226c0052e86147a1e1a5b6af57cfb, type: 3}
+  Desription: Jump higher
